@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>鬥靈圖鑑</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <div>
+        <h1>鬥靈圖鑑</h1>
+        <p id="dataStatus">讀取資料中...</p>
+      </div>
+      <div class="header-actions">
+        <button class="reset-button" id="resetFilters" type="button">重設</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="dex-panel" aria-label="鬥靈列表">
+        <form class="toolbar" id="filters">
+          <label class="field field-search">
+            <span>搜尋</span>
+            <input id="searchInput" type="search" placeholder="中文名、英文名、ID、技能">
+          </label>
+
+          <label class="field">
+            <span>稀有度</span>
+            <select id="rarityFilter">
+              <option value="">全部</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>屬性</span>
+            <select id="typeFilter">
+              <option value="">全部</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>排序</span>
+            <select id="sortSelect">
+              <option value="tier">稀有度</option>
+              <option value="cost">價格</option>
+              <option value="name_zh">中文名</option>
+              <option value="name_en">英文名</option>
+              <option value="id">ID</option>
+            </select>
+          </label>
+        </form>
+
+        <div class="result-bar">
+          <div>
+            <strong id="resultCount">0</strong>
+            <span>筆結果</span>
+          </div>
+          <div class="result-actions">
+            <div class="variant-filter" aria-label="型態篩選">
+              <label>
+                <input id="normalFilter" type="checkbox" checked>
+                <span>正常</span>
+              </label>
+              <label>
+                <input id="shinyFilter" type="checkbox">
+                <span>閃光</span>
+              </label>
+            </div>
+            <div class="view-toggle" aria-label="排版切換">
+              <button class="view-button" id="cardViewButton" type="button">卡片</button>
+              <button class="view-button is-active" id="tableViewButton" type="button">表格</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="monster-grid" id="monsterGrid" aria-live="polite" hidden></div>
+        <div class="table-wrap" id="tableWrap">
+          <table class="monster-table">
+            <thead>
+              <tr>
+                <th>鬥靈</th>
+                <th>稀有度</th>
+                <th>屬性</th>
+                <th>冷卻</th>
+                <th>施放效果</th>
+                <th>價格</th>
+                <th>技能效果</th>
+              </tr>
+            </thead>
+            <tbody id="monsterTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <aside class="detail-panel" id="detailPanel" aria-label="鬥靈詳細資料">
+        <div class="detail-empty">
+          <span>選擇一隻鬥靈</span>
+        </div>
+      </aside>
+    </main>
+
+    <section class="team-panel" aria-label="組隊模擬">
+      <div class="team-header">
+        <div>
+          <h2>組隊模擬</h2>
+          <p>選 6 隻鬥靈，檢查相鄰、方向與屬性條件是否命中。</p>
+        </div>
+        <div class="team-controls">
+          <button class="reset-button" id="clearTeam" type="button">清空隊伍</button>
+        </div>
+      </div>
+      <div class="team-layout">
+        <div class="team-board" id="teamBoard"></div>
+        <div class="synergy-panel">
+          <h3>技能命中分析</h3>
+          <div id="synergyList" class="synergy-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <template id="monsterCardTemplate">
+      <button class="monster-card" type="button">
+        <span class="tier-badge"></span>
+        <img class="monster-sprite" alt="">
+        <span class="monster-name-zh"></span>
+        <span class="monster-name-en"></span>
+        <span class="monster-meta"></span>
+        <span class="type-row"></span>
+      </button>
+    </template>
+
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>
